@@ -14,6 +14,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["MainApi/MainApi.csproj", "MainApi/"]
 COPY ["Authentication.Extensions/Authentication.Extensions.csproj", "Authentication.Extensions/"]
+COPY ["ClientService.Dtos/ClientServices.Dtos.csproj", "ClientService.Dtos/"]
+COPY ["ReportService.Dtos/ReportServices.Dtos.csproj", "ReportService.Dtos/"]
 RUN dotnet restore "./MainApi/MainApi.csproj"
 COPY . .
 WORKDIR "/src/MainApi"
