@@ -1,9 +1,15 @@
-﻿namespace MainApi.HttpClients;
+﻿using ReportServices.Dtos;
+
+namespace MainApi.HttpClients;
 
 public class ReportHttpClient(HttpClient client)
 {
-    public Task GenerateReport(int clientId)
+    private const string _reportEndpoint = "/Report";
+    public async Task<ReportResultDto?> GenerateReport(ReportDto reportDto)
     {
-        return Task.CompletedTask;
+        var response = await client.PostAsJsonAsync(_reportEndpoint, reportDto);
+        response.EnsureSuccessStatusCode();
+        var report = await response.Content.ReadFromJsonAsync<ReportResultDto>();
+        return report;
     }
 }
