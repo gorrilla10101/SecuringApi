@@ -17,5 +17,9 @@ namespace MainApi.Services
             };
             return httpClient.GenerateReport(reportDto);
         }
+        public Task<ReportSettingsDto?> GetReportSettings(int clientId)
+        {
+            return httpClient.GetReportSettings(clientId);
+        }
     }
 }

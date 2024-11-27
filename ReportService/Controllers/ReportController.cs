@@ -22,5 +22,15 @@ namespace ReportService.Controllers
             };
             return Ok(result);
         }
+
+        [HttpGet("Settings")]
+        public IActionResult GetReportSettings([FromQuery] int clientId)
+        {
+            var result = new ReportSettingsDto
+            {
+                DateTimeFormat = "yyyy-mm-dd"
+            };
+            return Ok(result);
+        }
     }
 }
