@@ -1,3 +1,7 @@
+# answers to code analysis are here
+[Code Quality](/CodeAnalysis-CodeQuality)
+[Code Quality](/CodeAnalysis-MethodOverrides)
+
 # SecuringApi
 
 This is an example of securing .net apis with OIDC and Bearer tokens. All Apis are protected by default requiring a valid, unexpired token and a specific audience. 
