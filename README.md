@@ -14,3 +14,7 @@ The client API is an API that will be used to manage client data.
 
 The Report Api will represent an API responsible for generating reports. 
 
+# Authentication.Extensions
+
+Project for creating a standardize authentication process for Apis. 
+

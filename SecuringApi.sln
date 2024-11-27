@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extras", "Extras", "{261DB2
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Extensions", "Authentication.Extensions\Authentication.Extensions.csproj", "{542404F8-1D3C-46B7-90E7-5EFB063617E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{3B4DA2D4-6F5F-48F0-BAD1-BB9791D65112}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B4DA2D4-6F5F-48F0-BAD1-BB9791D65112}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B4DA2D4-6F5F-48F0-BAD1-BB9791D65112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{542404F8-1D3C-46B7-90E7-5EFB063617E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542404F8-1D3C-46B7-90E7-5EFB063617E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542404F8-1D3C-46B7-90E7-5EFB063617E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542404F8-1D3C-46B7-90E7-5EFB063617E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
