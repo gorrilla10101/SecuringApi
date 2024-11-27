@@ -1,37 +1,43 @@
 # SecuringApi
 
-An example of securing and authorizing APIs using Jwt Bearer tokens and Role Based Access (RBAC)
+This is an example of securing .net apis with OIDC and Bearer tokens. All Apis are protected by default requiring a valid, unexpired token and a specific audience. 
 
 # MainAPI
 
-The MainApi is the entrypoint to the system. It is the only publicly exposed API. The MainAPI doesn't check roles, it verifies that the token is valid and includes an Audience for MainApi. It passes the token to the other APIs to handle any further authorization. 
-If MainApi was more than an orchestrator then it may have it's own authorization mechanis. 
+The MainAPI is the entry point to the system. It is the only publicly exposed API. The swagger UI is used to represent an "application" that would be using the APIs. 
+Instead of using a JWT Bearer token like the other APIs do, it leverages OpenId Connect and Cookie authentication. Utilizing this mechanism for application apis removes the need to store the token directly on the browser, in a readable format. 
+
+This implementation stores the access_token in an encrypted cookie. It is also possible to configure a session store and just send an Opaque cookie which is more secure but harder to scale. 
+
+MainApi does not apply strict authorization rules. It requires a valid user but otherwise leaves authorization to the services. It has two endpoints `/Report` and `/Settings/GetAllSettings`
+
+## /Report
+The `/Report` endpoint represents an order sensitive request where it makes a call to `/client/{clientid}/` to get client data that is passed to the `/report` endpoint. 
+
+## /Settings/GetAllSettings
+The `Settings/GetAllSettings` makes a call to `/client/{clientId}/settings` and `/Report/Settings?clientId={clientId}`. Since these calls are not dependent on each other it uses Task.WhenAll to allow them to be called simultaneously. 
+
 
 # Client Service
 
-The client API is an API that will be used to manage client data. The ClientService checks for the role ClientReader. 
+The client service uses a Jwt Bearer token with a ClientService audience for validating the token. It has two endpoints `GET /Client/{ClientId}` which is protected by an authorization policy called `CanGetClientInfo`and requires a role. The second endpoing is `GET /client/{clientId}/settings` which is protected by a different policy called `CanReadClientSettings`
 
 # Report Service
 
-The Report Api will represent an API responsible for generating reports. The report service uses ReportCreator and ReportReader roles to authorize a user. The ReportCreator allows the reports to be created while the reader allows them to be viewed.
-Being a ReportCreator does not guarantee that you can see the report. 
-
-# Authentication.Extensions
-
-Project for creating a standardize authentication process for Apis. 
+The report service uses a Jwt Bearer token with a ReportService audience for validating the token. It has two endpoints `POST /Report` which is protected by an authorization policy called `CanGenerateReport`and requires a role. The second endpoing is `/Report/Settings?clientId={clientId}` which is protected by a different policy called `CanReadReportSettings`
 
 # keycloak
 
-Keycloak is an identity provider capable or handling OIDC and SAMl authentication. There is a tenant called MyRealm that is used by the APIs to validate the JWT tokens using the .wellknown endpoints for configuration. 
+Keycloak is an identity provider capable or handling OIDC and SAMl authentication. There is a tenant called MyRealm that is used by the APIs to validate the JWT tokens using the .wellknown endpoints for configuration. The test user credentials are `testuser` for the username and password. 
 
-## Master Realm
+# dcproj
 
-The master realm in keycloak acts as the "SuperAdmin" and is the only realm capable of accessing and managing other realms. The username and password is *admin*. Realms are what keycloak calls tenants. 
+Developing software with multiple dependencies can be a pain. To simplify this process, I dockerized all the applications and then created a dcproj file in Visual Studios. The dcproj file allows you to execute docker compose commands to run your application. This allowed me to start all 3 APIs and keycloak together. 
 
-## MyRealm
+# Running the application (Easy Way)
 
-MyRealm is the realm used for the application. MainApi, ClientService and ReportService are registered as clients but they can't authenticate themselves. They are used to group roles together inside of keycloak. 
-The ExampleApplication is a client with *Direct Access Grant* also known as the Resource Owner, which allows the username and password to be passed with the client id and secret. While the authorization code flow is preferred for user interaction, 
-This is useful for user-less environments and integration tests. 
+1. install docker desktop or rancher desktop 
+2. update hosts file so that host.docker.internal points to 127.0.0.1 (localhost)
+3. Run the application using `docker compose up -d` or through Visual Studios. 
 
-There is also a test user created with the username and password of testuser.
+Note: Visual Studios changes the project name of the compose file so data does not transfer between the two running methods.    
