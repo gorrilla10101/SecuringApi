@@ -9,5 +9,10 @@ namespace MainApi.Services
         {
             return httpClient.GetClient(clientId);
         }
+
+        public Task<ClientSettingsDto?> GetClientSettings(int clientId)
+        {
+            return httpClient.GetClientSettings(clientId);
+        }
     }
 }

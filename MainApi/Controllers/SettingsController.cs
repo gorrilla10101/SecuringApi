@@ -19,7 +19,7 @@ namespace MainApi.Controllers
             }
             try
             {
-                var clientSettingsTask = clientService.GetClient(clientId);
+                var clientSettingsTask = clientService.GetClientSettings(clientId);
                 var reportSettingsTask = reportService.GetReportSettings(clientId);
 
                 await Task.WhenAll(clientSettingsTask, reportSettingsTask);

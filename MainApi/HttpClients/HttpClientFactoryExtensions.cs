@@ -11,12 +11,12 @@ namespace MainApi.HttpClients
             {
                 var url = configuration.GetValue<string>("ClientHttpClient:BaseAddress") ?? throw new InvalidOperationException("Url for ClientService was invalid");
                 client.BaseAddress = new Uri(url);
-            });
+            }).AddHttpMessageHandler<TokenMessageHandler>();
             services.AddHttpClient<ReportHttpClient>(client =>
             {
                 var url = configuration.GetValue<string>("ReportHttpClient:BaseAddress") ?? throw new InvalidOperationException("Url for ReportService was invalid");
                 client.BaseAddress = new Uri(url);
-            });
+            }).AddHttpMessageHandler<TokenMessageHandler>();
             return services;
         }
     }

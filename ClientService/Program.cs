@@ -4,6 +4,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddStandardAuthentication(builder.Configuration);
+
+builder.Services.AddAuthorization(p =>
+{
+    p.FallbackPolicy = p.DefaultPolicy;
+    p.AddPolicy("CanGetClientInfo", builder => builder.RequireRole("ClientReader"));
+    p.AddPolicy("CanReadClientSettings", builder => builder.RequireRole("ClientManager"));
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -21,6 +28,8 @@ else
 {
     app.UseHttpsRedirection();
 }
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

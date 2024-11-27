@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Authentication.Extensions;
 
@@ -19,6 +20,13 @@ public static class AuthenticationExtensions
             jwtOptions.RequireHttpsMetadata = jwtSettings.GetValue<bool>("RequireHttps");
             jwtOptions.Authority = jwtSettings.GetValue<string>("Authority");
             jwtOptions.Audience = jwtSettings.GetValue<string>("Audience");
+            jwtOptions.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents
+            {
+                OnTokenValidated = context =>
+                {
+                    return Task.CompletedTask;
+                }
+            };
         });
     }
 }

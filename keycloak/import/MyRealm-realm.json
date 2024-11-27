@@ -828,8 +828,9 @@
         "included.client.audience" : "MainApi",
         "id.token.claim" : "false",
         "lightweight.claim" : "false",
+        "introspection.token.claim" : "false",
         "access.token.claim" : "true",
-        "introspection.token.claim" : "false"
+        "userinfo.token.claim" : "false"
       }
     }, {
       "id" : "441cc766-f2c8-4628-a42c-55f59b113f3a",
@@ -841,8 +842,9 @@
         "included.client.audience" : "ClientService",
         "id.token.claim" : "false",
         "lightweight.claim" : "false",
+        "introspection.token.claim" : "false",
         "access.token.claim" : "true",
-        "introspection.token.claim" : "false"
+        "userinfo.token.claim" : "false"
       }
     }, {
       "id" : "b78b5ab0-a807-4986-bf6e-6e857dd66a42",
@@ -854,8 +856,9 @@
         "included.client.audience" : "ReportService",
         "id.token.claim" : "false",
         "lightweight.claim" : "false",
+        "introspection.token.claim" : "false",
         "access.token.claim" : "true",
-        "introspection.token.claim" : "false"
+        "userinfo.token.claim" : "false"
       }
     } ]
   }, {
@@ -991,12 +994,15 @@
       "protocolMapper" : "oidc-usermodel-client-role-mapper",
       "consentRequired" : false,
       "config" : {
-        "user.attribute" : "foo",
         "introspection.token.claim" : "true",
+        "multivalued" : "true",
+        "userinfo.token.claim" : "false",
+        "user.attribute" : "foo",
+        "id.token.claim" : "false",
+        "lightweight.claim" : "false",
         "access.token.claim" : "true",
-        "claim.name" : "resource_access.${client_id}.roles",
-        "jsonType.label" : "String",
-        "multivalued" : "true"
+        "claim.name" : "roles",
+        "jsonType.label" : "String"
       }
     }, {
       "id" : "8466d67d-01c9-42d1-a8e4-5db2ae5a693b",
@@ -1482,7 +1488,7 @@
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-attribute-mapper", "saml-role-list-mapper", "saml-user-property-mapper", "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper" ]
+        "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "oidc-usermodel-attribute-mapper", "oidc-usermodel-property-mapper", "oidc-address-mapper", "saml-user-attribute-mapper", "saml-role-list-mapper", "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper" ]
       }
     }, {
       "id" : "36ae6149-ee69-457e-b8e0-fac4bc2d4db2",
@@ -1516,7 +1522,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "oidc-usermodel-attribute-mapper", "saml-role-list-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper", "saml-user-attribute-mapper", "saml-user-property-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-role-list-mapper", "saml-user-property-mapper", "oidc-address-mapper", "saml-user-attribute-mapper", "oidc-usermodel-property-mapper", "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-usermodel-attribute-mapper" ]
       }
     } ],
     "org.keycloak.keys.KeyProvider" : [ {
