@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Authentication.Extensions\Authentication.Extensions.csproj" />
-    <ProjectReference Include="..\ReportService.Dtos\ReportService.Dtos.csproj" />
+    <ProjectReference Include="..\ReportService.Dtos\ReportServices.Dtos.csproj" />
   </ItemGroup>
 
 </Project>

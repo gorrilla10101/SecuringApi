@@ -1,4 +1,4 @@
-﻿namespace ClientService.Dtos
+﻿namespace ClientServices.Dtos
 {
     public class ClientDto
     {

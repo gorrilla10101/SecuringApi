@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReportServices.Dtos
+﻿namespace ReportServices.Dtos
 {
-    public class ReportDto
+    public class ReportResultDto
     {
+
         public int ClientId { get; set; }
         public required string CurrencySymbol { get; set; }
         public required string ClientName { get; set; }
         public required string ReportName { get; set; }
+        public bool IsCompleted { get; set; }
+        public decimal Total { get; set; }
     }
 }
