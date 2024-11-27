@@ -1,0 +1,36 @@
+services:
+  mainapi:
+    image: ${DOCKER_REGISTRY-}mainapi
+    build:
+      context: .
+      dockerfile: MainApi/Dockerfile
+
+  clientservice:
+    image: ${DOCKER_REGISTRY-}clientservice
+    build:
+      context: .
+      dockerfile: ClientService/Dockerfile
+
+
+  reportservice:
+    image: ${DOCKER_REGISTRY-}reportservice
+    build:
+      context: .
+      dockerfile: ReportService/Dockerfile
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.6
+    user: root
+    container_name: keycloak
+    command: start-dev --import-realm
+    ports:
+      - "8080:8080"
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./keycloak/import:/opt/keycloak/data/import:rw
+
+volumes:
+  keycloak_data:

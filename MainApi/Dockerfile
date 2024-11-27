@@ -13,6 +13,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["MainApi/MainApi.csproj", "MainApi/"]
+COPY ["Authentication.Extensions/Authentication.Extensions.csproj", "Authentication.Extensions/"]
 RUN dotnet restore "./MainApi/MainApi.csproj"
 COPY . .
 WORKDIR "/src/MainApi"
