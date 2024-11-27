@@ -22,6 +22,8 @@ services:
     image: quay.io/keycloak/keycloak:26.0.6
     user: root
     container_name: keycloak
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: start-dev --import-realm
     ports:
       - "8080:8080"
