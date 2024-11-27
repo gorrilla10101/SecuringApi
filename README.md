@@ -12,10 +12,16 @@ This implementation stores the access_token in an encrypted cookie. It is also p
 MainApi does not apply strict authorization rules. It requires a valid user but otherwise leaves authorization to the services. It has two endpoints `/Report` and `/Settings/GetAllSettings`
 
 ## /Report
+
 The `/Report` endpoint represents an order sensitive request where it makes a call to `/client/{clientid}/` to get client data that is passed to the `/report` endpoint. 
 
 ## /Settings/GetAllSettings
+
 The `Settings/GetAllSettings` makes a call to `/client/{clientId}/settings` and `/Report/Settings?clientId={clientId}`. Since these calls are not dependent on each other it uses Task.WhenAll to allow them to be called simultaneously. 
+
+## Polly Retry
+
+All of the http clients are registered with the HttpClientFactory with a retry. It uses polly to implement exponential backoff when on 500s, timeouts and 404s. 
 
 
 # Client Service
