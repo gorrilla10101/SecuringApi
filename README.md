@@ -1,6 +1,6 @@
 # answers to code analysis are here
-[Code Quality](/CodeAnalysis-CodeQuality)
-[Code Quality](/CodeAnalysis-MethodOverrides)
+[Code Quality](https://github.com/gorrilla10101/SecuringApi/blob/main/CodeAnalysis-CodeQuality.md)
+[Method Overrides](https://github.com/gorrilla10101/SecuringApi/blob/main/CodeAnalysis-MethodOverrides.md)
 
 # SecuringApi
 
