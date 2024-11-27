@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReportServices.Dtos;
 
@@ -9,6 +10,7 @@ namespace ReportService.Controllers
     {
 
         [HttpPost]
+        [Authorize("CanGenerateReport")]
         public IActionResult CreateClientReport([FromBody] ReportDto reportDto)
         {
             var result = new ReportResultDto
@@ -24,6 +26,7 @@ namespace ReportService.Controllers
         }
 
         [HttpGet("Settings")]
+        [Authorize("CanReadReportSettings")]
         public IActionResult GetReportSettings([FromQuery] int clientId)
         {
             var result = new ReportSettingsDto

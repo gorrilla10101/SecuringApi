@@ -44,7 +44,7 @@ namespace MainApi.Controllers
                 };
                 return Ok(settings);
             }
-            catch (AggregateException ex)
+            catch (HttpRequestException ex)
             {
                 logger.LogError(ex, "One or more tasks failed retrieving settings for client {clientId}", clientId);
                 return Problem("Unable to get settings");

@@ -4,6 +4,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddStandardAuthentication(builder.Configuration);
+builder.Services.AddAuthorization(p =>
+{
+    p.FallbackPolicy = p.DefaultPolicy;
+    p.AddPolicy("CanGenerateReport", builder => builder.RequireRole("ReportCreator"));
+    p.AddPolicy("CanReadReportSettings", builder => builder.RequireRole("ReportManager"));
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
