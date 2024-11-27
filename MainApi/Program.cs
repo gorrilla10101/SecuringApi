@@ -2,6 +2,7 @@ using MainApi.HttpClients;
 using MainApi.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
@@ -31,7 +32,8 @@ builder.Services
         options.ResponseType = "code";
         options.UsePkce = true;
         options.SaveTokens = true;
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        options.MapInboundClaims = false;
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidAudience = "ExampleApplication"
         };

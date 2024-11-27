@@ -25,6 +25,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: start-dev --import-realm
+    # command: export --dir /opt/keycloak/data/import --users realm_file --realm MyRealm
     ports:
       - "8080:8080"
     environment:
