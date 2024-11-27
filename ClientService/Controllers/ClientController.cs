@@ -1,3 +1,4 @@
+using ClientServices.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClientService.Controllers
@@ -6,18 +7,14 @@ namespace ClientService.Controllers
     [Route("[controller]")]
     public class ClientController : ControllerBase
     {
-
-        private readonly ILogger<ClientController> _logger;
-
-        public ClientController(ILogger<ClientController> logger)
+        public ClientController()
         {
-            _logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult GetClient()
+        [HttpGet("{clientId}")]
+        public IActionResult GetClient([FromRoute] int clientId)
         {
-            var clientDetail = new ClientDetails { ClientId = 1, ClientName = "Example Client" };
+            var clientDetail = new ClientDto { ClientId = clientId, ClientName = "Example Client", CurrencySymbol = "$" };
             return Ok(clientDetail);
         }
     }
