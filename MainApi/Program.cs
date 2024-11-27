@@ -1,8 +1,12 @@
 using Authentication.Extensions;
 using MainApi.HttpClients;
+using MainApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<TokenMessageHandler>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.RegisterHttpClients(builder.Configuration);
 // Add services to the container.
 builder.Services.AddStandardAuthentication(builder.Configuration);
